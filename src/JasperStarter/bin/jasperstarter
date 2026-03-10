@@ -14,13 +14,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-## detect home folder
-if(test -L "$0") then
-  auxlink=`ls -l "$0" | sed 's/^[^>]*-> //g'`
-  HOME_FOLDER=`dirname "$auxlink"`/..
-else 
-  HOME_FOLDER=`dirname "$0"`/..
-fi
+DIRECTORY=$(dirname $(readlink -f $0))
 
-#SCRIPTPATH="$(dirname $0)"
-java -jar "$HOME_FOLDER/lib/jasperstarter.jar" "$@"
+java -jar "$DIRECTORY/../lib/jasperstarter.jar" "$@"
